@@ -1,0 +1,24 @@
+﻿body {
+	margin: 0;
+	padding: 0;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+
+table.displaySamplesTable{
+	margin: 20px 10%;
+	table-layout: fixed;
+	width: 80%;
+}
+	table.displaySamplesTable tr{
+		border-bottom: 1px solid #cccccc;
+	}
+	table.displaySamplesTable th,
+	table.displaySamplesTable td{
+		padding: 10px 0;
+	}

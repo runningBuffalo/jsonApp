@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TestDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Samples">
+    <Key>
+      <PropertyRef Name="SampleId" />
+    </Key>
+    <Property Name="SampleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Barcode" Type="varchar" MaxLength="55" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="StatusId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Status">
+    <Key>
+      <PropertyRef Name="StatusId" />
+    </Key>
+    <Property Name="StatusId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Status" Type="varchar" MaxLength="55" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" MaxLength="55" Nullable="false" />
+    <Property Name="LastName" Type="varchar" MaxLength="55" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Samples_Status">
+    <End Role="Status" Type="Self.Status" Multiplicity="1" />
+    <End Role="Samples" Type="Self.Samples" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Status">
+        <PropertyRef Name="StatusId" />
+      </Principal>
+      <Dependent Role="Samples">
+        <PropertyRef Name="StatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Samples_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="Samples" Type="Self.Samples" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Samples">
+        <PropertyRef Name="CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TestDataModelStoreContainer">
+    <EntitySet Name="Samples" EntityType="Self.Samples" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Samples_Status" Association="Self.FK_Samples_Status">
+      <End Role="Status" EntitySet="Status" />
+      <End Role="Samples" EntitySet="Samples" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Samples_Users" Association="Self.FK_Samples_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Samples" EntitySet="Samples" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

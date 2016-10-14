@@ -1,0 +1,16 @@
+﻿    <div ng-controller="geneResults" ng-cloak>
+        <h2>{{currentSorting}}</h2>
+        <table class="displaySamplesTable">
+            <tr>
+                <th>Barcode</th>
+                <th>Status</th>
+                <th>Created By</th>
+            </tr>
+            <tr ng-repeat="sample in allSamples">
+                <td>{{sample.Barcode}}</td>
+                <td ng-click="getSamplesWithId(sample.StatusId);">{{sample.Status.Status1}}</td>
+                <td ng-click="getAllSamplesWithSameCreator(sample.CreatedBy);">{{sample.User.FirstName}} {{sample.User.LastName}}</td>
+            </tr>
+        </table>
+        <button ng-click="postTest();">Show all</button>
+    </div>
