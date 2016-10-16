@@ -32,9 +32,13 @@ namespace jsonApp.Controllers
         // POST api/values
         public IEnumerable<Sample> Post([FromBody]string value)
         {
+            var samples = from sample in db.Samples where sample.User.FirstName == value select sample;
+            return samples;
+            /*
             var result = db.Samples.Where(item => value.Any(stringToCheck =>
     item.User.FirstName.Contains(stringToCheck) || item.User.LastName.Contains(stringToCheck)));
             return result;
+            */
         }
 
         // PUT api/values/5

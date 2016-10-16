@@ -1,4 +1,17 @@
-﻿body {
+﻿/**
+* Author: George Heron
+* Origination Date: October 13, 2016
+* Version: Alpha (1)
+*
+* Domain: http://www.gheron.com
+*
+* Default CSS Styles
+* Dependencies: 
+				Bootstrap,
+				Modernizr
+* Target: All screens
+*/
+body {
 	margin: 0;
 	padding: 0;
 }
@@ -9,6 +22,32 @@
     padding-right: 15px;
 }
 
+.searchBar_label{
+	margin: 10px 10px 10px 10%;
+}
+.searchBar{
+	min-width: 200px;
+}
+.listStatus{
+	margin: 10px 10%;
+}
+.showAllButton{
+
+	margin: 0 10%;
+}
+button{
+	background:#2196f3;
+	background-image: -moz-linear-gradient(top, #2196f3, #004488);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#2196f3), to(#004488));
+	background-image: -webkit-linear-gradient(top, #2196f3, #004488);
+	background-image: -o-linear-gradient(top, #2196f3, #004488);
+	background-image: linear-gradient(to bottom, #2196f3, #004488);
+	color: #ffffff;
+	border: none;
+	border-radius: 5px;
+	box-shadow: none;
+	padding: 5px 20px;
+}
 
 table.displaySamplesTable{
 	margin: 20px 10%;
@@ -22,3 +61,73 @@ table.displaySamplesTable{
 	table.displaySamplesTable td{
 		padding: 10px 0;
 	}
+	
+	table.displaySamplesTable td .deleteRowSample{
+		background-color: #ff0000;
+		border-radius: 25px;
+		color: #ffffff;
+		cursor: pointer;
+		display: none;
+		float: right;
+		height: 25px;
+		width: 25px;
+	}
+	table.displaySamplesTable td .deleteRowSample::after{
+		content: "X";
+		font-weight: bold;
+		line-height: 25px;
+		margin: 8px;
+		text-align: center;
+	}
+	table.displaySamplesTable td:hover .deleteRowSample{
+		display: block;
+	}
+table.displaySamplesTable td .editRowSample{
+	color: blue;
+	cursor: pointer;
+	display: none;
+	float: right;
+	margin: 0 10px;
+	text-decoration: underline;
+}
+	table.displaySamplesTable td:hover .editRowSample{
+		display: block;
+	}
+
+div.addNewSampleWraper{
+	background-color: rgba(0,0,0,0.7);
+	bottom: 0;
+	left: 0;
+	position: fixed;
+	right: 0;
+	top: 0;
+}
+div.addNewSampleForm{
+	background-color: #ffffff;
+	border: 1px solid #cccccc;
+	border-radius: 5px;
+	top: calc(50% - 125px); 
+	height: 250px;
+	left: calc(50% - 175px);
+	padding: 20px;
+	position: fixed;
+	width: 350px;
+}
+div.addNewSampleForm h2{
+	border-bottom: 1px solid #f2f2f2;
+	margin: 0;
+	padding: 0 0 10px 0;
+	text-align: center;
+}
+div.addNewSampleForm label{
+	width: 30%;
+}
+div.addNewSampleForm input[type="text"],
+div.addNewSampleForm select{
+	height: 25px;
+	margin: 10px 0;
+	width: calc(70% - 20px);
+}
+div.addNewSampleForm .addSampleButton{
+	float: right;
+}

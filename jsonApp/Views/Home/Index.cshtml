@@ -1,16 +1,57 @@
 ﻿    <div ng-controller="geneResults" ng-cloak>
-        <h2>{{currentSorting}}</h2>
+    <label class="searchBar_label" for="searchBar">Search by name</label>
+    <input type="search" class="searchBar" id="searchBar" name="Search Filed" ng-model="searchTerm" ng-change="searchByCeartor()">
+    <button ng-click="searchByCeartor();">Search</button>
+        <h2 class="listStatus">{{currentSorting}}</h2>
+        <button class="showAllButton" ng-click="getAllSamples();">Show all</button>
+        <button class="showAllButton" ng-click="openAddNewWindow();">Add New</button>
         <table class="displaySamplesTable">
             <tr>
                 <th>Barcode</th>
-                <th>Status</th>
-                <th>Created By</th>
+                <th>
+                    Status
+                    <select ng-model="sortValue.StatusId" ng-change="getSamplesWithId(sortValue.StatusId);">
+                        <option ng-repeat="status in statusValues" value={{status.StatusId}}>{{status.Status1}}</option>
+                    </select>
+                </th>
+                <th>
+                    Created By
+                    <select ng-model="sortValue.CreatedBy" ng-change="getAllSamplesWithSameCreator(sortValue.CreatedBy);">
+                        <option ng-repeat="user in userList" value={{user.UserId}}>{{user.FirstName}} {{user.LastName}}</option>
+                    </select>
+                </th>
             </tr>
             <tr ng-repeat="sample in allSamples">
                 <td>{{sample.Barcode}}</td>
                 <td ng-click="getSamplesWithId(sample.StatusId);">{{sample.Status.Status1}}</td>
-                <td ng-click="getAllSamplesWithSameCreator(sample.CreatedBy);">{{sample.User.FirstName}} {{sample.User.LastName}}</td>
+                <td>
+                    <span  ng-click="getAllSamplesWithSameCreator(sample.CreatedBy);">
+                        {{sample.User.FirstName}} {{sample.User.LastName}}
+                    </span>
+                    <div class="deleteRowSample" ng-click="deleteSelectedSample(sample.SampleId);"></div>
+                    <div class=editRowSample ng-click="openEditWindow(sample.SampleId,sample.Barcode,sample.CreatedBy,sample.StatusId);">Edit</div>
+                </td>
+                
             </tr>
         </table>
-        <button ng-click="postTest();">Show all</button>
+        <div class="addNewSampleWraper" ng-show="addNewBoxVisibility">
+            <div class="addNewSampleForm">
+                <h2>Add new sample</h2>
+                <label>Barcode</label>
+                <input type="text" name="" ng-model="newSample.Barcode">
+                <br>
+                <label>Status</label>
+                <select ng-model="newSample.StatusId">
+                    <option ng-repeat="status in statusValues" value={{status.StatusId}}>{{status.Status1}}</option>
+                </select>
+                <br>
+                <label>Created By</label>
+                <select ng-model="newSample.CreatedBy">
+                    <option ng-repeat="user in userList" value={{user.UserId}}>{{user.FirstName}} {{user.LastName}}</option>
+                </select>
+                <button class="btn-warning" ng-click="addNewBoxVisibility = false">Cancel</button>
+                <button class="addSampleButton" ng-show="editButtonVisibility" ng-click="editSample();">Save</button>
+                <button class="addSampleButton" ng-show="addButtonVisibility" ng-click="addNewSample();">Add</button>
+            </div>
+        </div>
     </div>

@@ -32,13 +32,15 @@ namespace jsonApp.Controllers
         }
 
         // PUT: api/Samples/5
-        [ResponseType(typeof(void))]
+        //[ResponseType(typeof(void))]
         public IHttpActionResult PutSample(int id, Sample sample)
         {
+            /*
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+            */
 
             if (id != sample.SampleId)
             {
@@ -67,25 +69,23 @@ namespace jsonApp.Controllers
         }
 
         // POST: api/Samples
-        [ResponseType(typeof(Sample))]
-        public IHttpActionResult PostSample(Sample newSample)
+        //[ResponseType(typeof(Sample))]
+        public IHttpActionResult PostSample(Sample sample)
         {
-            //Sample newSample = new Sample { SampleId = id, Barcode = barcode, CreatedBy = creator, StatusId = status };
+            var myVar = sample;
+            var message = "success";
+            /*
+             if (!ModelState.IsValid)
+             {
+                 return BadRequest(ModelState);
+             }
+             */
+            
+            db.Samples.Add(sample);
+            db.SaveChanges();
 
-            //var sampleList = (from sample in db.Samples select sample).First();
-            db.Samples.Add(newSample);
-            var message = "";
-            try
-            {
-                db.SaveChanges();
-                message = "New sample has been saved";
-            }
-            catch
-            {
-                message = "Sorry, but there has been an error";
-            }
-
-            return View(message);
+            return Ok(message);
+            
         }
 
         // DELETE: api/Samples/5
